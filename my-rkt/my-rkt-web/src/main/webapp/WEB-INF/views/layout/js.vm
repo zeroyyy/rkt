@@ -1,0 +1,32 @@
+<!-- basic scripts -->
+<script language="javascript" type="text/javascript" src="/assets/js/My97DatePicker/WdatePicker.js?v=#vn()" ></script>
+<script type="text/javascript">
+if("ontouchend" in document) document.write("<script src='/assets/js/jquery.mobile.custom.min.js'>"+"<"+"script>");
+</script>
+<script src="/assets/js/bootstrap.min.js"></script>
+<script src="/assets/js/typeahead-bs2.min.js"></script>
+
+<!-- page specific plugin scripts -->
+
+<!--[if lte IE 8]>
+<script src="/assets/js/excanvas.min.js"></script>
+<![endif]-->
+
+<script src="/assets/js/jquery-ui-1.10.3.custom.min.js"></script>
+<script src="/assets/js/jquery.ui.touch-punch.min.js"></script>
+<script src="/assets/js/jquery.slimscroll.min.js"></script>
+<script src="/assets/js/jquery.easy-pie-chart.min.js"></script>
+<script src="/assets/js/jquery.sparkline.min.js"></script>
+<script src="/assets/js/jquery.min.js.js"></script>
+<script src="/assets/js/jquery.js"></script>
+<!-- ace scripts -->
+<script src="/assets/js/bootbox.min.js"></script>
+<script src="/assets/js/ace-elements.min.js"></script>
+<script src="/assets/js/ace.min.js"></script>
+<script src="/assets/js/diligrp.navigation.js"></script>
+<script src="/assets/js/jquery.tmpl.min.js"></script>
+
+<!-- inline scripts related to this page -->
+
+<!-- diligrp js -->
+

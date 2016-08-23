@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.dili.titan.TitanSequence">
+	<resultMap id="sequenceResultMap" type="titanSequence">
+		<result property="minValue" column="_out_min" />
+		<result property="maxValue" column="_out_max" />
+	</resultMap>
+	<select id="getSequence" statementType="CALLABLE" parameterType="java.util.HashMap" resultMap="sequenceResultMap">
+       <![CDATA[
+           {  
+              call pr_batch_sequence(
+              #{_name,mode=IN,javaType=string,jdbcType=VARCHAR},
+              #{_min,mode=IN,javaType=long,jdbcType=BIGINT},
+              #{_max,mode=IN,javaType=long,jdbcType=BIGINT},
+              #{_step,mode=IN,javaType=int,jdbcType=INTEGER},    
+              #{_out_min,mode=OUT,javaType=long,jdbcType=BIGINT}, 
+              #{_out_max,mode=OUT,javaType=long,jdbcType=BIGINT}        
+           )}    
+       ]]>
+	</select>
+</mapper>

@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	   xmlns:mvc="http://www.springframework.org/schema/mvc" xmlns:aop="http://www.springframework.org/schema/aop"
+	   xmlns:context="http://www.springframework.org/schema/context"
+	   xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+    http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
+    http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd
+    http://www.springframework.org/schema/aop
+    http://www.springframework.org/schema/aop/spring-aop.xsd"
+	   default-autowire="byName">
+
+
+
+	<context:component-scan base-package="com.rkt.web.contorller" />
+
+	<aop:aspectj-autoproxy proxy-target-class="true" />
+	<context:annotation-config />
+
+	<mvc:resources location="/assets/**" mapping="/assets/**" />
+	<mvc:default-servlet-handler/>
+
+	<bean id="velocityConfig" class="org.springframework.web.servlet.view.velocity.VelocityConfigurer">
+		<property name="resourceLoaderPath" value="/WEB-INF/views/" />
+		<property name="velocityProperties">
+			<props>
+				<prop key="input.encoding">UTF-8</prop>
+				<prop key="output.encoding">UTF-8</prop>
+				<prop key="contentType">text/html;charset=UTF-8</prop>
+				<prop key="file.resource.loader.cache">false</prop>
+				<prop key="file.resource.loader.modificationCheckInterval">1</prop>
+				<prop key="velocimacro.library.autoreload">true</prop>
+				<prop key="eventhandler.referenceinsertion.class">org.apache.velocity.app.event.implement.EscapeHtmlReference</prop>
+				<prop key="eventhandler.escape.html.match">/^(?!.*\\$screen_content).*$/</prop>
+			</props>
+		</property>
+	</bean>
+	<bean id="velocityViewResolver" class="org.springframework.web.servlet.view.velocity.VelocityLayoutViewResolver">
+        <property name="layoutUrl" value="layout/default.vm"/>
+		<property name="cache" value="false" />
+		<property name="suffix" value=".vm" />
+		<property name="exposeSpringMacroHelpers" value="true" />
+		<property name="dateToolAttribute" value="dateTool" />
+		<property name="numberToolAttribute" value="numberTool" />
+		<property name="contentType" value="text/html;charset=UTF-8" />
+	</bean>
+
+	<bean class="org.springframework.web.servlet.view.ContentNegotiatingViewResolver">
+		<property name="defaultContentType" value="text/html" />
+		<!-- not by accept header -->
+		<property name="ignoreAcceptHeader" value="true" />
+		<!-- by extension -->
+		<property name="mediaTypes">
+			<map>
+				<entry key="xml" value="application/xml" />
+				<entry key="json" value="application/json" />
+			</map>
+		</property>
+		<property name="viewResolvers">
+			<list>
+				<ref bean="velocityViewResolver" />
+			</list>
+		</property>
+		<property name="defaultViews">
+			<list>
+
+				<bean class="org.springframework.web.servlet.view.json.MappingJacksonJsonView" />
+			</list>
+		</property>
+	</bean>
+
+
+    <bean id="multipartResolver"
+          class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+        <property name="defaultEncoding" value="UTF-8" />
+    </bean>
+
+
+	<bean id="localeResolver" class="org.springframework.web.servlet.i18n.CookieLocaleResolver">
+		<property name="cookieName" value="_clientlocale" />
+		<property name="defaultLocale" value="zh_CN" />
+		<property name="cookieMaxAge" value="2147483647" />
+	</bean>
+
+
+	<bean id="velocityTools" class="java.util.HashMap">
+		<constructor-arg>
+			<map>
+				<entry key="domain" value="http://titan.dili.com/" />
+			</map>
+		</constructor-arg>
+	</bean>
+
+</beans>

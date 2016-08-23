@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:dubbo="http://code.alibabatech.com/schema/dubbo"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans
+            http://www.springframework.org/schema/beans/spring-beans.xsd
+            http://code.alibabatech.com/schema/dubbo
+            http://code.alibabatech.com/schema/dubbo/dubbo.xsd">
+ 
+
+    <!--<dubbo:protocol id="uc-dubbo" name="dubbo" />-->
+    <!--<dubbo:registry id="ucZooKeeper" address="${dobbo.service.register.url}" />-->
+
+    <!---->
+    <!--<dubbo:reference id="siteService"-->
+    <!--interface="com.xm.manweb.api.service.SiteService"-->
+    <!--registry="ucZooKeeper" group="com.xm.manweb" timeout="6000" check="false" version="1.0.0"/>-->
+    <!---->
+    <!--<dubbo:reference id="dateDictionarySerice"-->
+    <!--interface="com.xm.manweb.api.service.DataDictionaryService"-->
+    <!--registry="ucZooKeeper" group="com.xm.manweb" timeout="6000" check="false" version="1.0.0"/>-->
+    <!---->
+    <!--<dubbo:reference id="cityService"-->
+    <!--interface="com.xm.manweb.api.service.CityService"-->
+    <!--registry="ucZooKeeper" group="com.xm.manweb" timeout="6000" check="false" version="1.0.0"/>-->
+    <!---->
+    <!--<dubbo:reference id="productB2bService"-->
+    <!--interface="com.dili.product.api.ProductService"-->
+    <!--registry="ucZooKeeper" group="com.dili.product.api" timeout="6000" check="false" version="1.0.0"/>-->
+    <!---->
+</beans>

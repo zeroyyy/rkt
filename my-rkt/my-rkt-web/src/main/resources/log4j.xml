@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE log4j:configuration PUBLIC
+        "-//APACHE//DTD LOG4J 1.2//EN" "http://logging.apache.org/log4j/1.2/apidocs/org/apache/log4j/xml/doc-files/log4j.dtd">
+<log4j:configuration xmlns:log4j="http://jakarta.apache.org/log4j/">
+
+    <!--myrkt日志-->
+    <appender name="MYRKT" class="org.apache.log4j.DailyRollingFileAppender">
+        <param name="Encoding" value="UTF-8"/>
+        <param name="Append" value="true" />
+        <param name="File" value="${log.path}/myrkt/my_rkt.log"/>
+        <param name="DatePattern" value="'.'yyyy-MM-dd" />
+        <layout class="org.apache.log4j.PatternLayout">
+            <param name="ConversionPattern" value="[%p] [%d{yyyy-MM-dd HH:mm:ss SSS}] [%r] [%c] - %m %n"/>
+        </layout>
+    </appender>
+    <category name="MY_RKT" additivity="true">
+        <priority value="${log.level}"/>
+        <appender-ref ref="CONSOLE"/> <!-- 该appender需要在上线时删除，以免输出重复的日志到catalina.out文件 -->
+        <appender-ref ref="MYRKT"/>
+    </category>
+
+    <!--RKTMQ日志-->
+    <appender name="RKTMQ" class="org.apache.log4j.DailyRollingFileAppender">
+        <param name="Encoding" value="UTF-8"/>
+        <param name="Append" value="true" />
+        <param name="File" value="${log.path}/myrkt/rkt_mq.log"/>
+        <param name="DatePattern" value="'.'yyyy-MM-dd" />
+        <layout class="org.apache.log4j.PatternLayout">
+            <param name="ConversionPattern" value="[%p] [%d{yyyy-MM-dd HH:mm:ss SSS}] [%r] [%c] - %m %n"/>
+        </layout>
+    </appender>
+    <category name="RKT_MQ" additivity="true">
+        <priority value="${log.level}"/>
+        <appender-ref ref="CONSOLE"/> <!-- 该appender需要在上线时删除，以免输出重复的日志到catalina.out文件 -->
+        <appender-ref ref="RKTMQ"/>
+    </category>
+
+    <!--运行时异常日志-->
+    <appender name="EXCEPTION" class="org.apache.log4j.DailyRollingFileAppender">
+        <param name="Encoding" value="UTF-8"/>
+        <param name="Append" value="true" />
+        <param name="File" value="${log.path}/myrkt/exception.log"/>
+        <param name="DatePattern" value="'.'yyyy-MM-dd" />
+        <layout class="org.apache.log4j.PatternLayout">
+            <param name="ConversionPattern" value="[%p] [%d{yyyy-MM-dd HH:mm:ss SSS}] [%r] [%c] - %m %n"/>
+        </layout>
+    </appender>
+    <category name="EXCEPTION" additivity="true">
+        <priority value="${log.level}"/>
+        <appender-ref ref="CONSOLE"/> <!-- 该appender需要在上线时删除，以免输出重复的日志到catalina.out文件 -->
+        <appender-ref ref="EXCEPTION"/>
+    </category>
+
+    <!--默认日志 -->
+    <appender name="FILE_ALL" class="org.apache.log4j.DailyRollingFileAppender">
+        <param name="Encoding" value="UTF-8"/>
+        <param name="Append" value="true" />
+        <param name="File" value="${log.path}/myrkt/all.log"/>
+        <param name="DatePattern" value="'.'yyyy-MM-dd" />
+        <layout class="org.apache.log4j.PatternLayout">
+            <param name="ConversionPattern" value="[%p] [%d{yyyy-MM-dd HH:mm:ss SSS}] [%r] [%c] - %m %n"/>
+        </layout>
+    </appender>
+    <category name="DEFAULT" additivity="true">
+        <priority value="${log.level}"/>
+        <appender-ref ref="CONSOLE"/> <!-- 该appender需要在上线时删除，以免输出重复的日志到catalina.out文件 -->
+        <appender-ref ref="FILE_ALL"/>
+    </category>
+
+    <!--控制台日志-->
+    <appender name="CONSOLE" class="org.apache.log4j.ConsoleAppender">
+        <layout class="org.apache.log4j.PatternLayout">
+            <param name="ConversionPattern" value="[%5p] [%d{yyyy-MM-dd HH:mm:ss SSS}] [%t] (%F:%L) %m%n"/>
+        </layout>
+    </appender>
+    <root>
+        <priority value="${log.level}"/>
+        <appender-ref ref="CONSOLE"/>
+    </root>
+</log4j:configuration>

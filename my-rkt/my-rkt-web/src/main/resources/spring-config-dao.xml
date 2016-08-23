@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+    		http://www.springframework.org/schema/beans/spring-beans.xsd
+       		http://www.springframework.org/schema/context 
+     		http://www.springframework.org/schema/context/spring-context.xsd
+     		http://www.springframework.org/schema/aop
+			http://www.springframework.org/schema/aop/spring-aop.xsd"
+       default-autowire="byName">
+
+	<context:component-scan base-package="com.rkt.dao"/>
+
+    <bean id="baseDataSource" class="com.alibaba.druid.pool.DruidDataSource"
+        init-method="init" destroy-method="close">
+        <property name="filters" value="stat"/>
+        <property name="maxActive" value="${jdbc.maxActive}"/>
+        <property name="initialSize" value="${jdbc.initialSize}"/>
+        <property name="maxWait" value="${jdbc.maxWait}"/>
+        <property name="minIdle" value="${jdbc.minIdle}"/>
+        <property name="timeBetweenEvictionRunsMillis" value="${jdbc.timeBetweenEvictionRunsMillis}"/>
+        <property name="minEvictableIdleTimeMillis" value="${jdbc.minEvictableIdleTimeMillis}"/>
+        <property name="validationQuery" value="SELECT now()"/>
+        <property name="testWhileIdle" value="true"/>
+        <property name="testOnBorrow" value="false"/>
+        <property name="testOnReturn" value="false"/>
+        <property name="poolPreparedStatements" value="${jdbc.poolPreparedStatements}"/>
+        <property name="maxOpenPreparedStatements" value="${jdbc.maxOpenPreparedStatements}"/>
+
+
+        <property name="driverClassName" value="${jdbc.driverClass}"/>
+        <property name="url" value="${master.jdbcUrl}"/>
+        <property name="username" value="${master.jdbc.username}"/>
+        <property name="password" value="${master.jdbc.password}"/>
+    </bean>
+    <!--配置数据库主从，目前不需要先注释，有需要自行打开即可并注释掉上面的数据库账号配置
+      <bean id="masterDataSource" parent="baseDataSource"
+              init-method="init" destroy-method="close">
+            <property name="driverClassName" value="${jdbc.driverClass}"/>
+            <property name="url" value="${master.jdbcUrl}"/>
+            <property name="username" value="${master.jdbc.username}"/>
+            <property name="password" value="${master.jdbc.password}"/>
+        </bean>
+
+        <bean id="slaveDataSource" parent="baseDataSource"
+              init-method="init" destroy-method="close">
+            <property name="driverClassName" value="${jdbc.driverClass}"/>
+            <property name="url" value="${slave.jdbcUrl}"/>
+            <property name="username" value="${slave.jdbc.username}"/>
+            <property name="password" value="${slave.jdbc.password}"/>
+        </bean>
+
+        <bean id="dynamicDataSource" class="com.dili.titan.common.datasource.DynamicDataSource">
+            <property name="masterDataSources">
+                <map key-type="java.lang.String">
+                    &lt;!&ndash; write  key从1,2,3...按顺序开始命名&ndash;&gt;
+                    <entry key="master1" value-ref="masterDataSource"/>
+                    <entry key="master2" value-ref="masterDataSource"/>
+                    <entry key="master3" value-ref="masterDataSource"/>
+                </map>
+
+            </property>
+            <property name="slaveDataSources">
+                <map key-type="java.lang.String">
+                    &lt;!&ndash; read key从1,2,3...按顺序开始命名&ndash;&gt;
+                    <entry key="slave1" value-ref="slaveDataSource"/>
+                    <entry key="slave2" value-ref="slaveDataSource"/>
+                    <entry key="slave3" value-ref="slaveDataSource"/>
+                </map>
+
+            </property>
+            <property name="defaultTargetDataSource" ref="masterDataSource"/>
+        </bean>
+
+        <bean id="manyDataSourceAspect" class="com.dili.titan.common.datasource.DataSourceAspect">
+            <property name="mastersCount" value="3"/>
+        </bean>
+        <aop:config>
+            <aop:aspect id="c" ref="manyDataSourceAspect">
+                <aop:pointcut id="tx" expression="@within(com.dili.titan.common.datasource.DynamicSource)"/>
+                <aop:around pointcut-ref="tx" method="around"/>
+            </aop:aspect>
+        </aop:config>-->
+
+	<!-- 配置事务管理器 -->
+	<bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+		<!--<property name="dataSource" ref="dynamicDataSource" />-->
+		<property name="dataSource" ref="baseDataSource" />
+	</bean>
+
+	<!-- 集成Mybatis -->
+	<bean id="sessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+		<!--<property name="dataSource" ref="dynamicDataSource" />-->
+        <property name="dataSource" ref="baseDataSource" />
+		<property name="configLocation" value="classpath:sqlmap-config.xml" />
+	</bean>
+
+	<bean id="sqlTemplate" class="org.mybatis.spring.SqlSessionTemplate">
+		<constructor-arg index="0" ref="sessionFactory" />
+	</bean>
+	<bean id="batchSqlTemplate" class="org.mybatis.spring.SqlSessionTemplate">
+		<constructor-arg index="0" ref="sessionFactory" />
+		<constructor-arg index="1" value="BATCH" />
+	</bean>
+</beans>

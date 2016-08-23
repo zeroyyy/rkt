@@ -1,0 +1,16 @@
+.settings
+.project
+.classpath
+*.class
+
+# Package Files #
+*.jar
+*.war
+*.ear
+
+
+# Maven
+target
+
+META-INF
+.idea

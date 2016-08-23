@@ -1,0 +1,18 @@
+<table class="table table-bordered table-striped formLayout m0">
+	<tr>
+		<td>id:</td>
+		<td>$!{tMyrktUser.id}</td>
+		<td>name:</td>
+		<td>$!{tMyrktUser.name}</td>
+	</tr>
+	<tr>
+		<td>age:</td>
+		<td>$!{tMyrktUser.age}</td>
+		<td>ctime:</td>
+		<td>$!{tMyrktUser.ctime}</td>
+	</tr>
+	<tr>
+		<td>utime:</td>
+		<td colspan="3">$!{tMyrktUser.utime}</td>
+	</tr>
+</table>

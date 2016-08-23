@@ -1,0 +1,17 @@
+
+$!{out}
+$!{page}
+$!{productPopAudits}
+<form  action="/tMyrktUser/saveUpdate" method="POST" enctype="multipart/form-data" >
+	<table class="table table-bordered table-striped formLayout m0">
+		<tr>
+			<td>name:</td>
+			<td><input type="text" name="name" value="$!{tMyrktUser.name}" /></td>
+		</tr>
+		<tr>
+			<td>age:</td>
+<td><input type="text" name="age" value="$!{tMyrktUser.age}" /></td>
+
+</table>
+    <input type="submit" />
+</form>

@@ -1,0 +1,54 @@
+<DIV id="navBar" title="tMyrktUser">
+	<li><a href="$!{contextPath}/">首页</a><span class="divider">/</span></li>
+	<li class="active">tMyrktUser</li>
+</DIV>
+<form class="well form-search" name="tMyrktUserListForm" action="/tMyrktUser" method="POST">
+	<!-- 智能分页与排序 -->
+	<input type="hidden" name="currentPage" value="$!{page.currentPage}"/>
+	<input type="hidden" name="pageSize" value="$!{page.pageSize}"/>
+	<input type="hidden" name="orderField" value="$!{tMyrktUser.orderField}"/>
+	<input type="hidden" name="orderFieldType" value="$!{tMyrktUser.orderFieldType}"/>
+	<!-- 查询条件 -->
+	<input class="span2" type="text" name="id" value="$!{tMyrktUser.id}" placeholder="id"/>
+	<input class="span2" type="text" name="name" value="$!{tMyrktUser.name}" placeholder="name"/>
+	<input class="span2" type="text" name="age" value="$!{tMyrktUser.age}" placeholder="age"/>
+	<button type="submit" class="btn"><i class="icon-search"></i>搜索</button>
+	<!-- 新增按钮 -->
+	<div class="btn-group pull-right">
+		<a class="btn" onclick="XUI.window.open('/tMyrktUser/0',null,'PUT',{title:$(this).text()})"><i class="icon-pencil"></i>新增</a>
+	</div>
+</form>
+
+<!-- 表格数据 -->
+<table class="table table-striped table-bordered table-condensed grid">
+	<thead>
+		<tr>
+			<th #sorting($!{tMyrktUser} "id")>id</th>
+			<th #sorting($!{tMyrktUser} "name")>name</th>
+			<th #sorting($!{tMyrktUser} "age")>age</th>
+			<th #sorting($!{tMyrktUser} "ctime")>ctime</th>
+			<th #sorting($!{tMyrktUser} "utime")>utime</th>
+			<th>操作</th>
+		</tr>
+	</thead>
+	<tbody>
+#foreach(${item} in ${page.result})
+		<tr>
+			<td>$!{item.id}</td>
+			<td>$!{item.name}</td>
+			<td>$!{item.age}</td>
+			<td>$!{item.ctime}</td>
+			<td>$!{item.utime}</td>
+			<td class="textC">
+				<div class="btn-group">
+					<a class="btn btn-mini" onclick="XUI.ajax.delete('/tMyrktUser/${item.id}',null,{refresh:true})"><i class="icon-trash"></i> 删除</a>
+					<a class="btn btn-mini" onclick="XUI.window.open('/tMyrktUser/${item.id}',null,'PUT',{title:$(this).text()})"><i class="icon-pencil"></i> 修改</a>
+					<a class="btn btn-mini" onclick="XUI.window.open('/tMyrktUser/${item.id}',null,'GET',{title:$(this).text()})"><i class="icon-eye-open"></i> 查看</a>
+				</div>
+			</td>
+		</tr>
+#end
+	</tbody>
+</table>
+<!-- 分页栏 -->
+#showPage($!{page})

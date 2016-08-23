@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:dubbo="http://code.alibabatech.com/schema/dubbo"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans
+            http://www.springframework.org/schema/beans/spring-beans.xsd
+            http://code.alibabatech.com/schema/dubbo
+            http://code.alibabatech.com/schema/dubbo/dubbo.xsd">
+
+  	<!--<bean id="categoryRpcService" class="com.dili.titan.rpc.service.impl.CategoryRpcServiceImpl" /> -->
+  	<!--<bean id="productBaseRpcService" class="com.dili.titan.rpc.service.impl.ProductBaseServiceRpcServiceImpl" /> -->
+  	<!--<bean id="productBrandRpcService" class="com.dili.titan.rpc.service.impl.ProductBrandServiceImpl" /> -->
+  	<!---->
+    <!--&lt;!&ndash; 提供方应用信息，用于计算依赖关系 &ndash;&gt;-->
+    <!--<dubbo:application name="xm-baserProduct_api"/>-->
+    <!--&lt;!&ndash; 使用multicast广播注册中心暴露服务地址 &ndash;&gt;-->
+    <!--<dubbo:registry id="zookeeper" address="${dobbo.service.register.url}"/>-->
+    <!--<dubbo:protocol name="dubbo" port="20880" /> -->
+ <!---->
+ 	<!--<dubbo:service group="com.dili.product.api" interface="com.dili.product.api.CategoryRpcService" registry="zookeeper" register="true" ref="categoryRpcService" version="1.0.0"/> -->
+     <!---->
+    <!--<dubbo:service group="com.dili.product.api" interface="com.dili.product.api.ProductBaseService" registry="zookeeper" register="true" ref="productBaseRpcService" version="1.0.0"/>-->
+    <!---->
+     <!--<dubbo:service group="com.dili.product.api" interface="com.dili.product.api.ProductBrandService" registry="zookeeper" register="true" ref="productBrandRpcService" version="1.0.0"/>  -->
+
+
+ 
+</beans>

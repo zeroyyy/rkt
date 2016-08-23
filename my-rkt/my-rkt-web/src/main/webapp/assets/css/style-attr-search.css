@@ -1,0 +1,54 @@
+body {
+	padding: 0px;
+	margin: 0px;
+}
+li, ul {
+	padding: 0px;
+	margin: 0px;
+	list-style: none;
+}
+.search-view {
+	margin: 20px;
+}
+.search-view .s-input {
+	border: 1px solid #ccc;
+    height: 30px;
+    padding: 0 4px;
+    width: 290px;
+}
+.search-view .form-area {
+    font-size: 13px;
+    position: relative;
+    width: 290px;
+    float: left;
+    line-height: 20px;
+    margin-top: 9px;
+}
+.search-view .test {
+    float: none;
+}
+.search-view .selector {
+    background-color: #fff;
+    border-color: #ccc;
+    border-style: solid;
+    border-width: 0 1px 1px;
+    color: #005ea7;
+    display: none;
+    max-height: 128px;
+    overflow-x: hidden;
+    overflow-y: auto;
+    position: absolute;
+    top: 32px;
+    width: 288px;
+    z-index: 2;
+}
+.search-view .selector div {
+    color: #999;
+    cursor: pointer;
+    padding: 3px 5px;
+    width: 150px;
+}
+.search-view .selector div:hover {
+    background-color: #fffafa;
+    color: #ff2828;
+}
